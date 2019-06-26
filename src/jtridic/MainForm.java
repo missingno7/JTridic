@@ -45,23 +45,21 @@ public class MainForm extends javax.swing.JFrame {
 
         initComponents();
 
+        Config cf = Config.getInstance();
+        cf.Initialize(jCheckBox1, jCheckBox2, jCheckBox3, jCheckBox4, jCheckBox5, jTextField1);
+        cf.ClearConfig();
+        cf.LoadConfig("config.txt");
+        cf.LoadCheckConfig("extras.txt");
         
         
         cpControl = new CopierController();
-
-        DetectedFolderList fldList = DetectedFolderList.getInstance();
-        Config cf = Config.getInstance();
-        cf.Initialize(jCheckBox1, jCheckBox2, jCheckBox3, jCheckBox4, jCheckBox5, jTextField1);
-
+        
         DetectedFolderList dfList = DetectedFolderList.getInstance();
         dfList.Initialize(jList1);
 
         Copier cp = Copier.getInstance();
         cp.Initialize(jLabel1, jProgressBar1, cpControl,jLabel3);
 
-        cf.ClearConfig();
-        cf.LoadConfig("config.txt");
-        cf.LoadCheckConfig("extras.txt");
 
     }
 
@@ -96,7 +94,7 @@ public class MainForm extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("JTřídič V0.62");
+        setTitle("JTřídič V0.63");
         setBackground(java.awt.SystemColor.controlHighlight);
         setLocation(new java.awt.Point(600, 200));
         setResizable(false);
