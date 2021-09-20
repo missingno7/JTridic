@@ -1,1 +1,1 @@
-rok,mesic,den,presunout,
+rok,mesic,den,obdobi,presunout,

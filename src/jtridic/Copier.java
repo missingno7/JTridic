@@ -147,14 +147,16 @@ public class Copier {
         Config cf = Config.getInstance();
         long totalSize=getItemsSize();
         
-        progressBar.setMaximum((int) totalSize);// possible lossy
-        progressBar.setStringPainted(true);
 
         int i = 0;
 
         //System.out.println(totalSize);
         long copiedSpace = 0;
         int filesCount = items.size();
+
+        
+        progressBar.setMaximum((int) filesCount);// possible lossy
+        progressBar.setStringPainted(true);
 
         long startTime=System.currentTimeMillis();
         
@@ -186,14 +188,15 @@ public class Copier {
             }
 
             //System.out.println(item.from.toPath().toString() + "->" + fileTo.toPath().toString());
-            progressBar.setValue((int) copiedSpace); // Possible lossy conversion
+            progressBar.setValue((int) i); // Possible lossy conversion
             //progressBar.update(progressBar.getGraphics());
             //progressBar.repaint();
 
             //statusDisplay.setText(item.from.getAbsolutePath());
-            updateCopyDisplay(item.from, filesCount, i, copiedSpace, totalSize,System.currentTimeMillis()-startTime);
+            updateCopyDisplay                    (item.from,     filesCount,        i,          copiedSpace, totalSize,System.currentTimeMillis()-startTime);
 
-            //public void updateCopyDisplay(File currentFile,int filesCount, int fileNumber,long spaceUsed,long totalSize){
+            //public void updateCopyDisplay(File currentFile, int filesCount, int fileNumber, long spaceUsed, long totalSize, long elapsedTime) {
+
             try {
                 if (cf.extras.presunout) {
                     Files.move(item.from.toPath(), fileTo.toPath());
@@ -274,7 +277,13 @@ public class Copier {
 
     public void clearItems() {
         items.clear();
+        if (control.stopped){
+        display.setText("Přerušeno.");
+        }
+        else
+        {
         display.setText("VŠE HOTOVO!!");
+        }
 
     }
 

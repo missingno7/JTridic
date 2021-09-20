@@ -45,21 +45,23 @@ public class MainForm extends javax.swing.JFrame {
 
         initComponents();
 
-        Config cf = Config.getInstance();
-        cf.Initialize(jCheckBox1, jCheckBox2, jCheckBox3, jCheckBox4, jCheckBox5, jTextField1);
-        cf.ClearConfig();
-        cf.LoadConfig("config.txt");
-        cf.LoadCheckConfig("extras.txt");
         
         
         cpControl = new CopierController();
-        
+
+        DetectedFolderList fldList = DetectedFolderList.getInstance();
+        Config cf = Config.getInstance();
+        cf.Initialize(jCheckBox1, jCheckBox2, jCheckBox3, jCheckBox4, jCheckBox5, jTextField1);
+
         DetectedFolderList dfList = DetectedFolderList.getInstance();
         dfList.Initialize(jList1);
 
         Copier cp = Copier.getInstance();
         cp.Initialize(jLabel1, jProgressBar1, cpControl,jLabel3);
 
+        cf.ClearConfig();
+        cf.LoadConfig(System.getenv("APPDATA") + "\\config.txt");
+        cf.LoadCheckConfig(System.getenv("APPDATA") + "\\extras.txt");
 
     }
 
@@ -92,9 +94,10 @@ public class MainForm extends javax.swing.JFrame {
         jToggleButton1 = new javax.swing.JToggleButton();
         jButton7 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jButton8 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("JTřídič V0.63");
+        setTitle("JTřídič V0.7.0");
         setBackground(java.awt.SystemColor.controlHighlight);
         setLocation(new java.awt.Point(600, 200));
         setResizable(false);
@@ -239,6 +242,13 @@ public class MainForm extends javax.swing.JFrame {
         jLabel3.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        jButton8.setText("Upravit konfiguraci");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -249,7 +259,9 @@ public class MainForm extends javax.swing.JFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -323,7 +335,8 @@ public class MainForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -407,9 +420,11 @@ public class MainForm extends javax.swing.JFrame {
                 jCheckBox5.setEnabled(false);
                 jList1.setEnabled(false);
                 jTextField1.setEnabled(false);
+                jButton8.setEnabled(false);
+
+                jToggleButton1.setSelected(false);
 
                 jToggleButton1.setEnabled(true);
-                jToggleButton1.setSelected(false);
                 jButton7.setEnabled(true);
 
                 Copier cp = Copier.getInstance();
@@ -426,9 +441,11 @@ public class MainForm extends javax.swing.JFrame {
                 jCheckBox5.setEnabled(true);
                 jList1.setEnabled(true);
                 jTextField1.setEnabled(true);
+                jButton8.setEnabled(true);
+
+                jToggleButton1.setSelected(false);
 
                 jToggleButton1.setEnabled(false);
-                jToggleButton1.setSelected(false);
                 jButton7.setEnabled(false);
 
             }
@@ -529,6 +546,26 @@ public class MainForm extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        
+                Config cf = Config.getInstance();
+
+        	Runtime rs = Runtime.getRuntime();
+		try {
+			rs.exec("notepad "+ cf.configFileName).waitFor();
+		}
+		catch (IOException e) {
+			System.out.println(e);
+		} catch (InterruptedException ex) {
+			System.out.println(ex);
+        }
+         
+        cf.ClearConfig();
+        cf.LoadConfig(cf.configFileName);
+
+    }//GEN-LAST:event_jButton8ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -582,6 +619,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
