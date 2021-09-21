@@ -3,14 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/MissingNO/Desktop/googlediskzal/Disk%20Google/Programovani/Java/JTridic/src/jtridic/Config.java</file>
-            <file>file:/C:/Users/MissingNO/Desktop/googlediskzal/Disk%20Google/Programovani/Java/JTridic/src/jtridic/CopyDialog.java</file>
-            <file>file:/C:/Users/MissingNO/Desktop/googlediskzal/Disk%20Google/Programovani/Java/JTridic/src/jtridic/CopierItem.java</file>
-            <file>file:/C:/Users/MissingNO/Desktop/googlediskzal/Disk%20Google/Programovani/Java/JTridic/src/jtridic/ConfigItem.java</file>
-            <file>file:/C:/Users/MissingNO/Desktop/googlediskzal/Disk%20Google/Programovani/Java/JTridic/src/jtridic/Copier.java</file>
-            <file>file:/C:/Users/MissingNO/Desktop/googlediskzal/Disk%20Google/Programovani/Java/JTridic/src/jtridic/CopierController.java</file>
-            <file>file:/C:/Users/MissingNO/Desktop/googlediskzal/Disk%20Google/Programovani/Java/JTridic/src/jtridic/CopyDialogData.java</file>
-            <file>file:/C:/Users/MissingNO/Desktop/googlediskzal/Disk%20Google/Programovani/Java/JTridic/src/jtridic/MainForm.java</file>
+            <file>file:/D:/Programování/JTridic/src/jtridic/MainForm.java</file>
+            <file>file:/D:/Programování/JTridic/src/jtridic/DetectedFolderList.java</file>
+            <file>file:/D:/Programování/JTridic/src/jtridic/CopyDialog.java</file>
+            <file>file:/D:/Programování/JTridic/src/jtridic/Copier.java</file>
+            <file>file:/D:/Programování/JTridic/src/jtridic/DiscSpaceItem.java</file>
         </group>
     </open-files>
 </project-private>

@@ -105,6 +105,10 @@ public class Copier {
 
         updateDisplay(discSpace.items);
 
+        if (items.size() == 0) {
+            display.setText("Není co kopírovat.");
+        }
+        
     }
 
     private Long getItemsSize() {
@@ -140,7 +144,6 @@ public class Copier {
         CopyDialogData dialogData = new CopyDialogData();
 
         if (items.size() == 0) {
-            display.setText("Není co kopírovat.");
             return;
         }
 
@@ -271,12 +274,6 @@ public class Copier {
 
         clearItems();
 
-        DetectedFolderList.getInstance().clearItems();
-
-    }
-
-    public void clearItems() {
-        items.clear();
         if (control.stopped){
         display.setText("Přerušeno.");
         }
@@ -285,6 +282,13 @@ public class Copier {
         display.setText("VŠE HOTOVO!!");
         }
 
+        
+        DetectedFolderList.getInstance().clearItems();
+
+    }
+
+    public void clearItems() {
+        items.clear();
     }
 
     public String getGoalPath(File file, File path, CopyExtras extras) {
@@ -327,19 +331,22 @@ public class Copier {
     }
 
     public void updateDisplay(Vector<DiscSpaceItem> items) {
-        for (DiscSpaceItem item : items) {
-            String text = "";
+        String text = "<HTML>";
 
-            text = "Disk " + item.driveLetter + ", potřeba: " + Other.bToMB(item.needed) + " MB, zbýva: " + Other.bToMB(item.remaining) + " MB";
+        for (DiscSpaceItem item : items) {
+
+            text += "Disk " + item.driveLetter + ", potřeba: " + Other.bToMB(item.needed) + " MB, zbýva: " + Other.bToMB(item.remaining) + " MB ";
 
             if (item.needed >= item.remaining) {
                 text += ", CHYBI " + Other.bToMB(item.needed - item.remaining) + "MB místa";
             } else {
                 text += ", OK.";
             }
-
-            display.setText(text);
+            text += "<BR>";
         }
+
+        text += "</HTML>";
+        display.setText(text);
 
     }
 
